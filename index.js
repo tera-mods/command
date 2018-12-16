@@ -26,7 +26,7 @@ class Command {
 						name: PRIVATE_CHANNEL_NAME
 					})
 
-					if(LOGIN_MESSAGE) this.message(`TERA Proxy enabled. Client version: ${mod.patchVersion} r${mod.base.protocolVersion}`)
+					if(LOGIN_MESSAGE) this.message(`TERA Proxy enabled. Client version: ${mod.patchVersion} r${mod.protocolVersion}`)
 				})
 		})
 
@@ -252,11 +252,7 @@ function parseArgs(str) {
 }
 
 module.exports = function Require(mod) {
-	if(mod.namespace !== 'command') {
-		const msg = Error(`"require('command')" is deprecated.\nUse "const {command} = mod.require" instead.`).stack
-		console.log('DeprecationWarning' + msg.slice(msg.indexOf(':')))
-		return mod.require.command
-	}
+	if(mod.name !== 'command') throw SyntaxError(`Cannot require('command')\nUse "const {command} = mod.require" instead.`)
 
 	return new Command(mod)
 }
