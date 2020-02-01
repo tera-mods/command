@@ -16,7 +16,8 @@ class Command {
 
 		mod.hook('S_LOGIN', 'raw', () => { this.loginHook = true })
 
-		mod.hook(mod.patchVersion < 90 ? 'S_LOAD_CLIENT_USER_SETTING' : 'S_REPLY_CLIENT_CHAT_OPTION_SETTING', 'raw', () => {
+		mod.hook(mod.patchVersion < 90 ? 'S_LOAD_CLIENT_USER_SETTING' : 'S_REPLY_CLIENT_CHAT_OPTION_SETTING', 'raw',
+			{ order: 50, filter: { fake: null } }, () => {
 			if(!this.loginHook) return
 
 			process.nextTick(() => {
