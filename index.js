@@ -162,7 +162,7 @@ class Command {
 			channel: PRIVATE_CHANNEL_ID,
 			authorID: 0,
 			authorName: '',
-			message: msg
+			message: `<font></font>${msg}`
 		})
 	}
 }
